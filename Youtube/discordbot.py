@@ -17,19 +17,19 @@ async def on_ready():
     print('Bot is running and has synced.')
 
 # Establish Command Name and Description 
-@bot.tree.command(name='***Enter a name***', description='***Enter a description***')
+@bot.tree.command(name='ip lookup', description='my ip ดักพวกกระจอก')
 
 # Bot Prompt, API Call, and Response Functionality
 @app_commands.describe(user_input = "***Ener a Prompt for the user***: ")                 # Prompt User for Input
-async def bot_name(interaction: discord.Interaction, user_input: str):                 
+async def Ip_Lookup(interaction: discord.Interaction, user_input: str):                 
 
     # Use Requests to Obtain Data from API
-    url = f'***Enter an API Endpoint***{apikey}***Input Variable***{user_input}'
+    url = f'https://api.ipgeolocation.io/ipgeo?apiKey{apikey}&ip={user_input}'
     response = requests.get(url)
     json_response = response.json()
 
     # Send Message Containing Requested Data to User
-    await interaction.response.send_message(f'***Enter a message to send to user***', ephemeral=True)
+    await interaction.response.send_message(f'IP: {json response["IP"]}\nCountry: {json response["country name"]}\isp: {json response["isp"]}', ephemeral=True)
     return
 
 bot.run(token) # Run Bot
